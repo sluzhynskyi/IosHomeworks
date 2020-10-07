@@ -1,6 +1,5 @@
 import Foundation
 
-
 struct Note:Hashable {
     var noteId: Int
     var name, text: String
@@ -12,60 +11,98 @@ struct Note:Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(noteId)
     }
+
 }
 
-var n1 = Note(noteId:0, name:"Hello", text:"world", tags:["start", "init", "first"])
+extension Note: Equatable {
+    static func == (lhs: Note, rhs: Note) -> Bool {
+        return lhs.name == rhs.name && lhs.text == lhs.text
+    }
+}
+
 class NoteDataManager{
     var noteId = 0
-    var dataSource:[Int: Note] = [:]
-    var removedSource:[Int: Note] = [:]
+    var dataSource:[Note] = []
+    var removedSource: [Note] = []
     
     // CRUD functions
     func createNote(noteName:String,noteText:String,noteTags:Set <String> = []) -> Note {
         var n = Note(noteId:self.noteId, name:noteName, text:noteText, tags:noteTags)
-        self.dataSource[self.noteId] = n
+        self.dataSource.append(n)
         self.noteId += 1
         return n 
     }
 
     func getNote(noteId id:Int) -> Note?{
-        return self.dataSource[id]
+        for n in self.dataSource{
+            if n.noteId == id{
+                return n
+            }
+        }
+        return nil
     }
 
     func popNote(noteId id:Int) -> Note?{
-        var rn = self.dataSource.removeValue(forKey:id)
-        rn.deletionDate = Date()
-        self.removedSource[id] = rn
-        return rn
+        for (index, element) in self.dataSource.enumerated() {
+           if element.noteId == id {
+               self.removedSource.append(element)
+               self.dataSource.remove(at:index)
+               return element
+           }
+        }
+        return nil
     }
     // Additional functions
     func setFavorite(noteId id:Int) -> Bool {
-        if (self.dataSource[id] != nil) {
-            self.dataSource[id]!.isFavorite = true
-            return true
+        for (index, element) in self.dataSource.enumerated() {
+            if element.noteId == id {
+                self.dataSource[index].isFavorite = true
+                return true
+            }
         }
         return false
     }
 
-    func restoreNote(noteId id:Int) -> Bool {
-        var rn = self.removedSource.removeValue(forKey:id)
-        if (rn != nil){
-            self.dataSource[id] = rn
-            return true
+    func restoreNote(noteId id:Int) -> Note? {
+        for (index, element) in self.dataSource.enumerated() {
+           if element.noteId == id {
+               self.removedSource.remove(at:index)
+               self.dataSource.append(element)
+               return element
+           }
         }
-        return false
+        return nil
     }
     
     func searchByName(noteName name:String) -> Note? {
-        let notes = Array(self.dataSource.values)
-        for n in notes{
+        for n in self.dataSource{
             if (n.name == name){
                 return n
             }
         }
         return nil
     }
+
+    func alreadyPresented(note n:Note) -> Bool{
+        if self.dataSource.contains(n){
+            return true
+        }
+        return false
+    }
     
+    func filterByTags(tags t:Set<String>)->[Note] {
+        var filtered = [Note]()
+        for n in self.dataSource{
+            if (n.tags.intersection(t).count == t.count){
+                filtered.append(n)
+            } 
+        }
+        return filtered
+    }
+    func sortingNotes(){
+        self.dataSource.sorted { $0.name > $1.name }
+    }
+
 }
 
 var ndm1 = NoteDataManager()
