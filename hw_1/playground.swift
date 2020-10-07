@@ -1,17 +1,12 @@
 import Foundation
 
-struct Note:Hashable {
+struct Note{
     var noteId: Int
     var name, text: String
     var tags:Set <String> = Set<String>()
     var isFavorite: Bool = false
     var creationDate = Date()
     var deletionDate: Date?
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(noteId)
-    }
-
 }
 
 extension Note: Equatable {
