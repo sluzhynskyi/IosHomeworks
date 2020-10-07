@@ -40,7 +40,8 @@ class NoteDataManager{
     func popNote(noteId id:Int) -> Note?{
         for (index, element) in self.dataSource.enumerated() {
            if element.noteId == id {
-               self.removedSource.append(element)
+               self.dataSource[index].deletionDate = Date()
+               self.removedSource.append(self.dataSource[index])
                self.dataSource.remove(at:index)
                return element
            }
@@ -99,8 +100,39 @@ class NoteDataManager{
     }
 
 }
-
+// TEST
 var ndm1 = NoteDataManager()
-ndm1.createNote(noteName:"Hello", noteText:"world")
+ndm1.createNote(noteName:"Fav Books",
+                noteText:"Lord of the Rings, Harry Potter and the Goblet of Fire",
+                noteTags:["books", "fantasy", "popular",])
+ndm1.createNote(noteName:"Mafia strategy",
+                noteText:"Not nervous, play with outher players, find mafia, ...",
+                noteTags:["remember", "popular", "game"])
+ndm1.createNote(noteName:"Dogs breeds",
+                noteText:"Labrador Retrievers, German Shepherds, Golden Retrievers, Beagles, German Shorthaired Pointers",
+                noteTags:["remember", "popular", "dogs"]) 
+ndm1.createNote(noteName:"Stocks portfolio",
+                noteText:"S&P 500, AAPL, AMZN, MSFT, GOOG",
+                noteTags:["money", "stocks",])
+ndm1.createNote(noteName:"Plan for a day",
+                noteText:"do hw, to  meet with girl, to kiss with girl, ... ",
+                noteTags:["plans", "remember", "personal"])
+ndm1.createNote(noteName:"Fav boardgame",
+                noteText:"secret hitler, classic mafia, DND, Spy ",
+                noteTags:["popular", "game"])
+
+print(ndm1.dataSource.count) // Test Create method
+print(ndm1.getNote(noteId:1)) // Test Read method
+ndm1.getNote(noteId:1)!.name = "!!!!"
+print(ndm1.getNote(noteId:1)) 
+
+// print(ndm1.popNote(noteId:4)) // Test Delete method
+// print(ndm1.dataSource.count) 
+// print(ndm1.removedSource.count) 
+// print(ndm1.removedSource)
+
+
+
+    
 
 // print(ndm1.dataSource)
