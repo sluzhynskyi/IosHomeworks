@@ -172,5 +172,3 @@ print(ndm1.searchByName(noteName:"Dogs breeds")) // Test searchByName
 print(ndm1.dataSource) // Before sorting
 ndm1.sortingNotes()
 print(ndm1.dataSource) // After sorting
-
-
