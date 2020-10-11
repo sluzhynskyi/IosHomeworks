@@ -1,13 +1,13 @@
 import Foundation
 
 struct Note{
-    var noteId: Int
+    var noteId: Int // Comment: why not let?
     var name, text: String
     var tags: Set <String> = Set<String>()
     var isFavorite: Bool = false
     var creationDate = Date()
     var deletionDate: Date?
-    init(noteId: Int, name:String, text:String, tags:Set <String>) {
+    init(noteId: Int, name:String, text:String, tags:Set <String>) { // init is redundant here, as it's struct's default one
         self.noteId = noteId
         self.name = name
         self.text = text
@@ -18,7 +18,7 @@ struct Note{
 
 extension Note: Equatable {
     static func == (lhs: Note, rhs: Note) -> Bool {
-        return lhs.name == rhs.name && lhs.text == lhs.text
+        return lhs.name == rhs.name && lhs.text == lhs.text // Comment: id?
     }
 }
 
@@ -28,7 +28,7 @@ class NoteDataManager{
     var removedSource: [Note] = []
     
     // CRUD functions
-    func createNote(noteName:String,noteText:String,noteTags:Set <String> = []) -> Note {
+    func createNote(noteName:String,noteText:String,noteTags:Set <String> = []) -> Note { // Comment: inappropriate variable naming and code style with spaces
         var n = Note(noteId:self.noteId, name:noteName, text:noteText, tags:noteTags)
         self.dataSource.append(n)
         self.noteId += 1
@@ -43,6 +43,12 @@ class NoteDataManager{
         }
         return nil
     }
+    
+//    Comment: it's much easier
+//    func getNote(noteId id: Int) -> Note? {
+//        dataSource.first(where: $0.noteId == id)
+//    }
+    
     func setNote(noteId id:Int, newNote n: Note) -> Bool{
         for (index, element) in self.dataSource.enumerated() {
             if element.noteId == id {
@@ -102,7 +108,12 @@ class NoteDataManager{
         return false
     }
     
-    func filterByTags(tags t:Set<String>)->[Note] {
+//    Comment
+//    func alreadyPresented(note: Note) -> Bool {
+//        dataSource.contains(note)
+//    }
+    
+    func filterByTags(tags t:Set<String>)->[Note] { // Comment: dataSource.contains(where:)
         var filtered = [Note]()
         for n in self.dataSource{
             if (n.tags.intersection(t).count == t.count){
