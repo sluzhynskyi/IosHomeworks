@@ -4,40 +4,25 @@
 //
 //  Created by Danylo Sluzhynskyi on 10.11.2020.
 //
-
 import UIKit
+var ndm1 = NoteDataManager()
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var noteTable: UITableView!
     @IBOutlet weak var noteSearchBar: UISearchBar!
-    var ndm1 = NoteDataManager()
+    
+
     var filteredNotes: [Note]!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        ndm1.createNote(name: "Fav Books",
-            text: "Lord of the Rings, Harry Potter and the Goblet of Fire",
-            tags: ["books", "fantasy", "popular",])
-        ndm1.createNote(name: "Mafia strategy",
-            text: "Not nervous, play with outher players, find mafia, ...",
-            tags: ["remember", "popular", "game"])
-        ndm1.createNote(name: "Dogs breeds",
-            text: "Labrador Retrievers, German Shepherds, Golden Retrievers, Beagles, German Shorthaired Pointers",
-            tags: ["remember", "popular", "dogs"])
-        ndm1.createNote(name: "Stocks portfolio",
-            text: "S&P 500, AAPL, AMZN, MSFT, GOOG",
-            tags: ["money", "stocks",])
-        ndm1.createNote(name: "Plan for a day",
-            text: "do hw, to  meet with girl, to kiss with girl, ... ",
-            tags: ["plans", "remember", "personal"])
-        ndm1.createNote(name: "Fav boardgame",
-            text: "secret hitler, classic mafia, DND, Spy ",
-            tags: ["popular", "game"])
         noteTable.register(NoteTableViewCell.nib(), forCellReuseIdentifier: NoteTableViewCell.identifier)
         noteTable.delegate = self
         noteTable.dataSource = self
         noteSearchBar.delegate = self
         filteredNotes = ndm1.dataSource
+        
         // Do any additional setup after loading the view.
 
 
@@ -60,9 +45,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        return 70
 //    }
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // Open the screen with note info ()
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "enter") as? EntryViewController else {
+            return
+        }
+        vc.note = filteredNotes[indexPath.row]
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+        vc.complitionHadler = { [weak self] in
+            self?.refresh()
+        }
+    }
 
     // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -70,5 +65,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.noteTable.reloadData()
 
     }
+    
+    @IBAction func didTapAddutton(){
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "enter") as? EntryViewController else {
+            return
+        }
+        vc.title = "New Item"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+        vc.complitionHadler = { [weak self] in
+            self?.refresh()
+        }
+    }
+    func refresh(){
+        print("refreshing")
+        filteredNotes = ndm1.dataSource
+        self.noteTable.reloadData()
+    }
 }
+
 

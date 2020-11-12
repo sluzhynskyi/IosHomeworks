@@ -1,5 +1,6 @@
 import Foundation
 
+
 struct Note {
     let noteId: Int
     var name, text: String
@@ -10,7 +11,7 @@ struct Note {
 
 }
 
-extension Note: Equatable {
+extension Note:Equatable {
     static func == (lhs: Note, rhs: Note) -> Bool {
         return lhs.name == rhs.name && lhs.text == lhs.text // Comment: id?
     }
