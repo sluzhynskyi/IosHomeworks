@@ -11,7 +11,7 @@ struct Note {
 
 }
 
-extension Note:Equatable {
+extension Note: Equatable {
     static func == (lhs: Note, rhs: Note) -> Bool {
         return lhs.name == rhs.name && lhs.text == lhs.text // Comment: id?
     }
@@ -58,10 +58,12 @@ class NoteDataManager {
         return nil
     }
     // Additional functions
-    func setFavorite(id noteId: Int) -> Bool {
+    func toggleFavorite(id noteId: Int) -> Bool {
+        // makes note favorite propery inverse to previous
         for (index, element) in self.dataSource.enumerated() {
             if element.noteId == noteId {
-                self.dataSource[index].isFavorite = true
+                let note = self.dataSource[index]
+                self.dataSource[index].isFavorite = !note.isFavorite
                 return true
             }
         }
