@@ -19,7 +19,8 @@ class EntryViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var constraintText: NSLayoutConstraint!
     @IBOutlet var tags: UITextView!
     @IBOutlet var constraintTags: NSLayoutConstraint!
-    public var complitionHadler: (() -> Void)?
+    public var complitionHandler: (() -> Void)?
+    public var deletionHandler: (() -> Void)?
 
     var note: Note?
     override func viewDidLoad() {
@@ -28,6 +29,10 @@ class EntryViewController: UIViewController, UITextViewDelegate {
         text.delegate = self
         tags.delegate = self
         tags.layer.cornerRadius = 12
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
+
+
         if self.note != nil {
             name.text = self.note!.name
             text.text = self.note!.text
@@ -59,7 +64,13 @@ class EntryViewController: UIViewController, UITextViewDelegate {
             }
         }
         ndm1.setNote(id: self.note!.noteId, note: self.note!)
-        complitionHadler?()
+        complitionHandler?()
     }
-
+    @objc private func didTapDelete() {
+        guard let item = note else { return }
+        ndm1.popNote(id: item.noteId)
+        deletionHandler?()
+        navigationController?.popToRootViewController(animated: true)
+        
+    }
 }
