@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		157D7852255E019000054E23 /* RemovedGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157D7850255E019000054E23 /* RemovedGroupTableViewCell.swift */; };
+		157D7853255E019000054E23 /* RemovedGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157D7851255E019000054E23 /* RemovedGroupTableViewCell.xib */; };
+		157D785A255E034C00054E23 /* RemoveOrRestoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157D7859255E034C00054E23 /* RemoveOrRestoreController.swift */; };
 		15924301255AF0FC00549FEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15924300255AF0FC00549FEC /* AppDelegate.swift */; };
 		15924303255AF0FC00549FEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15924302255AF0FC00549FEC /* SceneDelegate.swift */; };
 		15924305255AF0FC00549FEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15924304255AF0FC00549FEC /* ViewController.swift */; };
@@ -16,12 +19,14 @@
 		15924310255AF0FD00549FEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1592430E255AF0FD00549FEC /* LaunchScreen.storyboard */; };
 		15924319255B0E8000549FEC /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15924318255B0E8000549FEC /* Note.swift */; };
 		15C6D6F7255C2FD0007B6BC2 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C6D6F6255C2FD0007B6BC2 /* EntryViewController.swift */; };
-		15C6D6FA255C301E007B6BC2 /* NoteDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C6D6F9255C301E007B6BC2 /* NoteDescriptionViewController.swift */; };
 		15EE9B3F255B4CEE009E9068 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EE9B3D255B4CEE009E9068 /* NoteTableViewCell.swift */; };
 		15EE9B40255B4CEE009E9068 /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EE9B3E255B4CEE009E9068 /* NoteTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		157D7850255E019000054E23 /* RemovedGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovedGroupTableViewCell.swift; sourceTree = "<group>"; };
+		157D7851255E019000054E23 /* RemovedGroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemovedGroupTableViewCell.xib; sourceTree = "<group>"; };
+		157D7859255E034C00054E23 /* RemoveOrRestoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveOrRestoreController.swift; sourceTree = "<group>"; };
 		159242FD255AF0FC00549FEC /* HW2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15924300255AF0FC00549FEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15924302255AF0FC00549FEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +38,6 @@
 		15924311255AF0FD00549FEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15924318255B0E8000549FEC /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		15C6D6F6255C2FD0007B6BC2 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
-		15C6D6F9255C301E007B6BC2 /* NoteDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDescriptionViewController.swift; sourceTree = "<group>"; };
 		15EE9B3D255B4CEE009E9068 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		15EE9B3E255B4CEE009E9068 /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +85,9 @@
 				15EE9B3D255B4CEE009E9068 /* NoteTableViewCell.swift */,
 				15EE9B3E255B4CEE009E9068 /* NoteTableViewCell.xib */,
 				15C6D6F6255C2FD0007B6BC2 /* EntryViewController.swift */,
-				15C6D6F9255C301E007B6BC2 /* NoteDescriptionViewController.swift */,
+				157D7850255E019000054E23 /* RemovedGroupTableViewCell.swift */,
+				157D7851255E019000054E23 /* RemovedGroupTableViewCell.xib */,
+				157D7859255E034C00054E23 /* RemoveOrRestoreController.swift */,
 			);
 			path = HW2;
 			sourceTree = "<group>";
@@ -151,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15924310255AF0FD00549FEC /* LaunchScreen.storyboard in Resources */,
+				157D7853255E019000054E23 /* RemovedGroupTableViewCell.xib in Resources */,
 				1592430D255AF0FD00549FEC /* Assets.xcassets in Resources */,
 				15924308255AF0FC00549FEC /* Main.storyboard in Resources */,
 				15EE9B40255B4CEE009E9068 /* NoteTableViewCell.xib in Resources */,
@@ -167,11 +174,12 @@
 				15924305255AF0FC00549FEC /* ViewController.swift in Sources */,
 				15924319255B0E8000549FEC /* Note.swift in Sources */,
 				1592430B255AF0FC00549FEC /* testApp.xcdatamodeld in Sources */,
+				157D785A255E034C00054E23 /* RemoveOrRestoreController.swift in Sources */,
 				15C6D6F7255C2FD0007B6BC2 /* EntryViewController.swift in Sources */,
+				157D7852255E019000054E23 /* RemovedGroupTableViewCell.swift in Sources */,
 				15924301255AF0FC00549FEC /* AppDelegate.swift in Sources */,
 				15EE9B3F255B4CEE009E9068 /* NoteTableViewCell.swift in Sources */,
 				15924303255AF0FC00549FEC /* SceneDelegate.swift in Sources */,
-				15C6D6FA255C301E007B6BC2 /* NoteDescriptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K41-2U-IsW">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="g8o-8j-pCA">
+                                <searchBar key="tableHeaderView" contentMode="redraw" text="" id="g8o-8j-pCA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -49,7 +49,7 @@
                     <navigationItem key="navigationItem" title="Notes" id="XtD-8j-o1d">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3PH-ze-F4A">
                             <connections>
-                                <action selector="didTapAddutton" destination="hmQ-Rf-Cwa" id="1Br-1d-hqh"/>
+                                <action selector="didTapAddButton" destination="hmQ-Rf-Cwa" id="uu5-Qj-yTo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -104,8 +104,18 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JCU-9f-w4q">
+                                                <rect key="frame" x="20" y="57" width="374" height="46"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="Dib-gL-Snt"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zfi-4t-2me">
-                                                <rect key="frame" x="20" y="57" width="374" height="100"/>
+                                                <rect key="frame" x="20" y="103" width="374" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="fAp-yZ-svW"/>
@@ -117,12 +127,15 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="zfi-4t-2me" firstAttribute="top" secondItem="JCU-9f-w4q" secondAttribute="bottom" id="02k-QJ-tkp"/>
                                             <constraint firstAttribute="trailing" secondItem="zfi-4t-2me" secondAttribute="trailing" constant="20" id="ERd-3R-YVk"/>
+                                            <constraint firstAttribute="trailing" secondItem="JCU-9f-w4q" secondAttribute="trailing" constant="20" id="Fzl-sP-cQc"/>
+                                            <constraint firstItem="JCU-9f-w4q" firstAttribute="top" secondItem="8WP-1v-usw" secondAttribute="bottom" id="Scm-0n-YaN"/>
                                             <constraint firstItem="8WP-1v-usw" firstAttribute="top" secondItem="tHN-eV-nNs" secondAttribute="top" constant="5" id="Y2y-N5-YKE"/>
                                             <constraint firstItem="zfi-4t-2me" firstAttribute="leading" secondItem="tHN-eV-nNs" secondAttribute="leading" constant="20" id="l8w-tF-Ovy"/>
                                             <constraint firstItem="8WP-1v-usw" firstAttribute="leading" secondItem="tHN-eV-nNs" secondAttribute="leading" constant="20" id="nSw-52-spJ"/>
-                                            <constraint firstItem="zfi-4t-2me" firstAttribute="top" secondItem="8WP-1v-usw" secondAttribute="bottom" id="ofp-TM-sOr"/>
                                             <constraint firstAttribute="trailing" secondItem="8WP-1v-usw" secondAttribute="trailing" constant="20" id="qf8-O3-lEE"/>
+                                            <constraint firstItem="JCU-9f-w4q" firstAttribute="leading" secondItem="tHN-eV-nNs" secondAttribute="leading" constant="20" id="vSk-xd-g68"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -146,15 +159,32 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="constraintName" destination="f6P-mC-X4R" id="e69-jq-shU"/>
-                        <outlet property="constraintText" destination="fAp-yZ-svW" id="mc3-E2-wF0"/>
-                        <outlet property="name" destination="8WP-1v-usw" id="m8P-cg-iVl"/>
-                        <outlet property="text" destination="zfi-4t-2me" id="26g-t6-3qH"/>
+                        <outlet property="constraintName" destination="f6P-mC-X4R" id="iNY-YA-H5K"/>
+                        <outlet property="constraintTags" destination="Dib-gL-Snt" id="lfV-FF-Qdj"/>
+                        <outlet property="constraintText" destination="fAp-yZ-svW" id="MpG-rP-WC0"/>
+                        <outlet property="name" destination="8WP-1v-usw" id="cpq-n0-825"/>
+                        <outlet property="tags" destination="JCU-9f-w4q" id="9y7-Yj-n7x"/>
+                        <outlet property="text" destination="zfi-4t-2me" id="Qhq-La-VBb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plM-NA-aea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="257.97101449275362" y="-938.16964285714278"/>
+        </scene>
+        <!--Remove Or Restore Controller-->
+        <scene sceneID="J7G-gY-9iJ">
+            <objects>
+                <viewController storyboardIdentifier="removed" id="h6t-d1-9lU" customClass="RemoveOrRestoreController" customModule="HW2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Nl-aw-p21">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="XCZ-1S-y7p"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tbd-Nu-me8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167" y="-929"/>
         </scene>
     </scenes>
     <resources>
@@ -163,6 +193,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
