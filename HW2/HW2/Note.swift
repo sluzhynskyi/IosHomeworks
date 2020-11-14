@@ -73,8 +73,8 @@ class NoteDataManager {
     func restoreNote(id noteId: Int) -> Note? {
         for (index, element) in self.removedSource.enumerated() {
             if element.noteId == noteId {
-                self.removedSource.remove(at: index)
                 self.dataSource.append(element)
+                self.removedSource.remove(at: index)
                 return element
             }
         }

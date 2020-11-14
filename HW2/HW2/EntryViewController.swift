@@ -29,7 +29,6 @@ class EntryViewController: UIViewController, UITextViewDelegate {
         text.delegate = self
         tags.delegate = self
         tags.layer.cornerRadius = 12
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
 
 
@@ -48,7 +47,9 @@ class EntryViewController: UIViewController, UITextViewDelegate {
         constraintName.constant = self.name.contentSize.height
         constraintText.constant = self.text.contentSize.height
         constraintTags.constant = self.tags.contentSize.height
+        complitionHandler?()
     }
+    
     func textViewDidChange(_ textView: UITextView) {
         if (textView === name) {
             constraintName.constant = self.name.contentSize.height

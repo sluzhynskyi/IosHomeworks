@@ -171,16 +171,31 @@
             </objects>
             <point key="canvasLocation" x="257.97101449275362" y="-938.16964285714278"/>
         </scene>
-        <!--Remove Or Restore Controller-->
+        <!--Recently Deleted View Controller-->
         <scene sceneID="J7G-gY-9iJ">
             <objects>
-                <viewController storyboardIdentifier="removed" id="h6t-d1-9lU" customClass="RemoveOrRestoreController" customModule="HW2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="removed" id="h6t-d1-9lU" customClass="RecentlyDeletedViewController" customModule="HW2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Nl-aw-p21">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hes-mm-GAx">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="XCZ-1S-y7p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XCZ-1S-y7p" firstAttribute="trailing" secondItem="hes-mm-GAx" secondAttribute="trailing" id="79L-QW-zRe"/>
+                            <constraint firstItem="hes-mm-GAx" firstAttribute="top" secondItem="XCZ-1S-y7p" secondAttribute="top" id="dNo-1S-Hz5"/>
+                            <constraint firstItem="hes-mm-GAx" firstAttribute="leading" secondItem="XCZ-1S-y7p" secondAttribute="leading" id="jqT-Bc-TBF"/>
+                            <constraint firstItem="XCZ-1S-y7p" firstAttribute="bottom" secondItem="hes-mm-GAx" secondAttribute="bottom" id="sbP-Ad-rx5"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="recentlyDeletedTable" destination="hes-mm-GAx" id="Zpc-xi-xrR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tbd-Nu-me8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

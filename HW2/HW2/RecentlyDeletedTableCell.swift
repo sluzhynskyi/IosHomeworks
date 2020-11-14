@@ -1,5 +1,5 @@
 //
-//  RemovedGroupTableViewCell.swift
+//  RecentlyDeletedTableCell.swift
 //  HW2
 //
 //  Created by Danylo Sluzhynskyi on 13.11.2020.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class RemovedGroupTableViewCell: UITableViewCell {
-    static let identifier = "RemovedGroupTableViewCell"
+class RecentlyDeletedTableCell: UITableViewCell {
+    static let identifier = "RecentlyDeletedTableCell"
     static func nib() -> UINib {
-        return UINib(nibName: "RemovedGroupTableViewCell", bundle: nil)
+        return UINib(nibName: "RecentlyDeletedTableCell", bundle: nil)
     }
 
     override func awakeFromNib() {
