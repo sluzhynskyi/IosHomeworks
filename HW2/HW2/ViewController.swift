@@ -7,7 +7,7 @@
 import UIKit
 var ndm1 = NoteDataManager()
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NoteTableViewCellDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var noteTable: UITableView!
     @IBOutlet weak var noteSearchBar: UISearchBar!
 
@@ -41,15 +41,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let customCell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.identifier, for: indexPath) as! NoteTableViewCell
             let n = ndm1.filteredNotes[indexPath.row - 1]
             customCell.configure(with: n.name, date: n.creationDate, text: n.text, id: n.noteId)
-            customCell.delegate = self
             return customCell
         }
     }
 
-    func didTappedButton(with noteId: Int) {
-        ndm1.toggleFavorite(id: noteId)
-        self.noteTable.reloadData()
-    }
+
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
