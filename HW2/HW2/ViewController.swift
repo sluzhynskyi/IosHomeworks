@@ -11,19 +11,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var noteTable: UITableView!
     @IBOutlet weak var noteSearchBar: UISearchBar!
 
-
-    var filteredNotes: [Note]!
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTable.register(NoteTableViewCell.nib(), forCellReuseIdentifier: NoteTableViewCell.identifier)
-        noteTable.register(RecentlyDeletedTableCell.nib(), forCellReuseIdentifier: RecentlyDeletedTableCell.identifier)
+        noteTable.register(DisclosureIndicatorCell.nib(), forCellReuseIdentifier: DisclosureIndicatorCell.identifier)
         noteTable.delegate = self
         noteTable.dataSource = self
         noteSearchBar.delegate = self
-        filteredNotes = ndm1.dataSource
-
+        ndm1.filteredNotes = ndm1.dataSource
         // Do any additional setup after loading the view.
 
 
@@ -32,18 +27,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: TableView data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredNotes.count + 1
+        return ndm1.filteredNotes.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: RecentlyDeletedTableCell.identifier, for: indexPath) as! RecentlyDeletedTableCell
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DisclosureIndicatorCell.identifier, for: indexPath) as! DisclosureIndicatorCell
             cell.textLabel?.text = "Recently Deleted"
             cell.accessoryType = .disclosureIndicator
             return cell
-        } else {
+        default:
             let customCell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.identifier, for: indexPath) as! NoteTableViewCell
-            let n = filteredNotes[indexPath.row - 1]
+            let n = ndm1.filteredNotes[indexPath.row - 1]
             customCell.configure(with: n.name, date: n.creationDate, text: n.text, id: n.noteId)
             customCell.delegate = self
             return customCell
@@ -52,13 +48,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func didTappedButton(with noteId: Int) {
         ndm1.toggleFavorite(id: noteId)
-        self.refresh()
+        self.noteTable.reloadData()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // Open the screen with note info ()
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "removed") as? RecentlyDeletedViewController else {
                 return
             }
@@ -67,11 +64,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             vc.deletionHandler = { [weak self] in
                 self?.refresh()
             }
-        } else {
+        default:
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "enter") as? EntryViewController else {
                 return
             }
-            vc.note = filteredNotes[indexPath.row - 1]
+            vc.note = ndm1.filteredNotes[indexPath.row - 1]
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
             vc.complitionHandler = { [weak self] in
@@ -86,13 +83,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredNotes = searchText.isEmpty ? ndm1.dataSource: {
-            if searchText.hasPrefix("#") {
+            
+        if searchText.hasPrefix("#") {
                 let tags = Set(searchText.split(separator: "#", omittingEmptySubsequences: true).map { String($0) })
-                return ndm1.filterBy(tags: tags)
-            }
-            return ndm1.searchBy(name: searchText)
-        }()
+                ndm1.filterBy(tags: tags)
+            } else {
+                ndm1.searchBy(name: searchText)}
         self.noteTable.reloadData()
 
     }
@@ -113,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func refresh() {
         print("refresh")
-        filteredNotes = ndm1.dataSource
+        ndm1.filteredNotes = ndm1.dataSource
         self.noteTable.reloadData()
     }
 }
