@@ -7,10 +7,10 @@
 
 import UIKit
 
-class RecentlyDeletedTableCell: UITableViewCell {
-    static let identifier = "RecentlyDeletedTableCell"
+class DisclosureIndicatorCell: UITableViewCell {
+    static let identifier = "DisclosureIndicatorCell"
     static func nib() -> UINib {
-        return UINib(nibName: "RecentlyDeletedTableCell", bundle: nil)
+        return UINib(nibName: "DisclosureIndicatorCell", bundle: nil)
     }
 
     override func awakeFromNib() {

@@ -44,10 +44,12 @@ class EntryViewController: UIViewController, UITextViewDelegate {
             text.text = ""
             tags.text = "#"
         }
+        complitionHandler?()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         constraintName.constant = self.name.contentSize.height
         constraintText.constant = self.text.contentSize.height
         constraintTags.constant = self.tags.contentSize.height
-        complitionHandler?()
     }
     
     func textViewDidChange(_ textView: UITextView) {

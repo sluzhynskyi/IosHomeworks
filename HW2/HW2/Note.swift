@@ -21,6 +21,7 @@ class NoteDataManager {
     var noteId = 0
     var dataSource: [Note] = []
     var removedSource: [Note] = []
+    var filteredNotes: [Note] = []
 
     // CRUD functions
 
@@ -81,11 +82,11 @@ class NoteDataManager {
         return nil
     }
 
-    func searchBy(name noteName: String) -> [Note] {
+    func searchBy(name noteName: String) ->Void{
         let filtered = self.dataSource.filter {
             $0.name.lowercased().contains(noteName.lowercased())
         }
-        return filtered
+        self.filteredNotes = filtered
     }
 
 
@@ -94,11 +95,11 @@ class NoteDataManager {
         dataSource.contains(note)
     }
 
-    func filterBy(tags: Set <String>) -> [Note] {
+    func filterBy(tags: Set <String>) -> Void {
         let filtered = dataSource.filter {
             $0.tags.intersection(tags).count == tags.count
         }
-        return filtered
+        self.filteredNotes = filtered
 
     }
     func sortingNotes() {
