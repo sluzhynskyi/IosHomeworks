@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTable.register(NoteTableViewCell.nib(), forCellReuseIdentifier: NoteTableViewCell.identifier)
-        noteTable.register(RemovedGroupTableViewCell.nib(), forCellReuseIdentifier: RemovedGroupTableViewCell.identifier)
+        noteTable.register(RecentlyDeletedTableCell.nib(), forCellReuseIdentifier: RecentlyDeletedTableCell.identifier)
         noteTable.delegate = self
         noteTable.dataSource = self
         noteSearchBar.delegate = self
@@ -37,8 +37,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: RemovedGroupTableViewCell.identifier, for: indexPath) as! RemovedGroupTableViewCell
-            cell.textLabel?.text = "Remove or Restore Notes"
+            let cell = tableView.dequeueReusableCell(withIdentifier: RecentlyDeletedTableCell.identifier, for: indexPath) as! RecentlyDeletedTableCell
+            cell.textLabel?.text = "Recently Deleted"
             cell.accessoryType = .disclosureIndicator
             return cell
         } else {
@@ -59,11 +59,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         // Open the screen with note info ()
         if indexPath.row == 0 {
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: "removed") as? RemoveOrRestoreController else {
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "removed") as? RecentlyDeletedViewController else {
                 return
             }
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
+            vc.deletionHandler = { [weak self] in
+                self?.refresh()
+            }
         } else {
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "enter") as? EntryViewController else {
                 return
@@ -71,6 +74,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             vc.note = filteredNotes[indexPath.row - 1]
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
+            vc.complitionHandler = { [weak self] in
+                self?.refresh()
+            }
             vc.deletionHandler = { [weak self] in
                 self?.refresh()
             }
@@ -106,8 +112,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     func refresh() {
-//        print("refreshing")
-
+        print("refresh")
         filteredNotes = ndm1.dataSource
         self.noteTable.reloadData()
     }
