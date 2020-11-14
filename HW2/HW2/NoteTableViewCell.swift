@@ -7,16 +7,11 @@
 
 import UIKit
 
-protocol NoteTableViewCellDelegate:AnyObject {
-    func didTappedButton(with noteId: Int)
-}
-
 class NoteTableViewCell: UITableViewCell {
     static let identifier = "NoteTableViewCell"
     static func nib() -> UINib {
         return UINib(nibName: "NoteTableViewCell", bundle: nil)
     }
-    weak var delegate:NoteTableViewCellDelegate?
     var noteId:Int = 0
     public func configure(with title: String, date: Date, text:String, id noteId:Int) {
         self.noteId = noteId
@@ -30,11 +25,6 @@ class NoteTableViewCell: UITableViewCell {
     @IBOutlet var nameLable: UILabel!
     @IBOutlet var dateLable: UILabel!
     @IBOutlet var textLable: UILabel!
-    @IBAction func toggleButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        delegate!.didTappedButton(with: self.noteId)
-        
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

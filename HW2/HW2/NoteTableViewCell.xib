@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,28 +46,14 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRZ-MF-Erf">
-                        <rect key="frame" x="662" y="33.5" width="22" height="36"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                        <color key="tintColor" systemColor="systemYellowColor"/>
-                        <state key="normal" image="star" catalog="system">
-                            <color key="titleColor" systemColor="systemYellowColor"/>
-                        </state>
-                        <state key="selected" image="star.fill" catalog="system"/>
-                        <connections>
-                            <action selector="toggleButton:" destination="KGk-i7-Jjw" eventType="touchDown" id="IBz-Iv-HaW"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="N1s-sz-hIN" secondAttribute="trailing" constant="60" id="XZN-vK-3yd"/>
                     <constraint firstAttribute="bottom" secondItem="nDM-zh-8Zy" secondAttribute="bottom" constant="4" id="f1j-HL-OKA"/>
                     <constraint firstAttribute="trailing" secondItem="nDM-zh-8Zy" secondAttribute="trailing" constant="58" id="mb3-FV-6pG"/>
                     <constraint firstItem="N1s-sz-hIN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="oln-aN-Bx4"/>
-                    <constraint firstAttribute="trailing" secondItem="bRZ-MF-Erf" secondAttribute="trailing" constant="20" id="pAE-yS-hbA"/>
                     <constraint firstItem="nDM-zh-8Zy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="s84-jC-ssI"/>
                     <constraint firstItem="nDM-zh-8Zy" firstAttribute="top" secondItem="N1s-sz-hIN" secondAttribute="bottom" id="tXR-1u-oCs"/>
-                    <constraint firstItem="bRZ-MF-Erf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yTJ-aj-gic"/>
                     <constraint firstItem="N1s-sz-hIN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="zEJ-AN-qdz"/>
                 </constraints>
             </tableViewCellContentView>
@@ -81,13 +67,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="star" catalog="system" width="128" height="116"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
