@@ -13,7 +13,8 @@
 
 # Note App
 
-![note demo]()
+![record](https://user-images.githubusercontent.coam/44615981/99153202-c61f3b80-26af-11eb-9e5d-c3fc21de5f8a.gif)
+
 
 Note app that has searchbar, tags, and deletion and recovery feature.
 
