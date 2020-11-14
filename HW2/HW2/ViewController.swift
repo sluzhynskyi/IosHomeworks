@@ -83,12 +83,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            
+        if searchText.isEmpty{ ndm1.filteredNotes = ndm1.dataSource}else{
         if searchText.hasPrefix("#") {
                 let tags = Set(searchText.split(separator: "#", omittingEmptySubsequences: true).map { String($0) })
                 ndm1.filterBy(tags: tags)
             } else {
-                ndm1.searchBy(name: searchText)}
+                ndm1.searchBy(name: searchText)}}
         self.noteTable.reloadData()
 
     }
@@ -109,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func refresh() {
         print("refresh")
-        ndm1.filteredNotes = ndm1.dataSource
+        if (noteSearchBar.text!.isEmpty) {ndm1.filteredNotes = ndm1.dataSource}
         self.noteTable.reloadData()
     }
 }
