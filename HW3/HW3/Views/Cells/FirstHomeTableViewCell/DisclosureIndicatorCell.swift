@@ -1,6 +1,6 @@
 //
 //  RecentlyDeletedTableCell.swift
-//  HW2
+//  HW3
 //
 //  Created by Danylo Sluzhynskyi on 13.11.2020.
 //

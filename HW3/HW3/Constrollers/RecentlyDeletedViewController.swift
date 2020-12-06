@@ -1,6 +1,6 @@
 //
 //  RecentlyDeletedViewController.swift
-//  HW2
+//  HW3
 //
 //  Created by Danylo Sluzhynskyi on 13.11.2020.
 //
@@ -16,7 +16,7 @@ class RecentlyDeletedViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     func didTapDeleteNote(with noteId: Int) {
-        if let index = ndm1.removedSource.firstIndex(where: {$0.noteId == noteId}) {
+        if let index = ndm1.removedSource.firstIndex(where: { $0.noteId == noteId }) {
             ndm1.removedSource.remove(at: index)
         }
         recentlyDeletedTable.reloadData()
@@ -38,7 +38,7 @@ class RecentlyDeletedViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DeleteOrRestoreTableViewCell.identifier, for: indexPath) as! DeleteOrRestoreTableViewCell
         let note = ndm1.removedSource[indexPath.row]
-        cell.configure(with: note.name, id: note.noteId)
+        cell.configure(with: note.name!, id: Int(note.noteId))
         cell.delegate = self
         return cell
     }

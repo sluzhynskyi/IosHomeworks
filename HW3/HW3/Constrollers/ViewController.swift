@@ -10,17 +10,27 @@ var ndm1 = NoteDataManager()
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var noteTable: UITableView!
     @IBOutlet weak var noteSearchBar: UISearchBar!
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Register custom cells
         noteTable.register(NoteTableViewCell.nib(), forCellReuseIdentifier: NoteTableViewCell.identifier)
         noteTable.register(DisclosureIndicatorCell.nib(), forCellReuseIdentifier: DisclosureIndicatorCell.identifier)
+
+        // Setup for TableView
         noteTable.delegate = self
         noteTable.dataSource = self
-        noteSearchBar.delegate = self
-        ndm1.filteredNotes = ndm1.dataSource
-        // Do any additional setup after loading the view.
 
+        // Setup for SearchBar
+        noteSearchBar.delegate = self
+        // Setting context for CoreData
+        ndm1.context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+        // Get items from Core Data
+        ndm1.fetchNotes()
+        ndm1.filteredNotes = ndm1.dataSource
+        DispatchQueue.main.async {
+            self.noteTable.reloadData()
+        }
     }
 
     // MARK: TableView data source
@@ -38,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         default:
             let customCell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.identifier, for: indexPath) as! NoteTableViewCell
             let n = ndm1.filteredNotes[indexPath.row - 1]
-            customCell.configure(with: n.name, date: n.creationDate, text: n.text, id: n.noteId)
+            customCell.configure(with: n.name!, date: n.creationDate!, text: n.text!, id: Int(n.noteId))
             return customCell
         }
     }
@@ -75,12 +85,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty { ndm1.filteredNotes = ndm1.dataSource} else {
-        if searchText.hasPrefix("#") {
+        if searchText.isEmpty { ndm1.filteredNotes = ndm1.dataSource } else {
+            if searchText.hasPrefix("#") {
                 let tags = Set(searchText.split(separator: "#", omittingEmptySubsequences: true).map { String($0) })
                 ndm1.filterBy(tags: tags)
             } else {
-                ndm1.searchBy(name: searchText)}}
+                ndm1.searchBy(name: searchText) } }
         self.noteTable.reloadData()
 
     }
@@ -101,7 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func refresh() {
         print("refresh")
-        if noteSearchBar.text!.isEmpty {ndm1.filteredNotes = ndm1.dataSource}
+        if noteSearchBar.text!.isEmpty { ndm1.filteredNotes = ndm1.dataSource }
         self.noteTable.reloadData()
     }
 }

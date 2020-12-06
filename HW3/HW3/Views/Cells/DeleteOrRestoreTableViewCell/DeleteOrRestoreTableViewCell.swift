@@ -1,6 +1,6 @@
 //
 //  DeleteOrRestoreTableViewCell.swift
-//  HW2
+//  HW3
 //
 //  Created by Danylo Sluzhynskyi on 13.11.2020.
 //
@@ -28,9 +28,9 @@ class DeleteOrRestoreTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    public func configure(with title: String, id nodeId: Int) {
+    public func configure(with title: String, id: Int) {
         nameLable.text = title
-        self.noteId = nodeId
+        self.noteId = id
     }
     @IBAction func recoverNote(_ sender: UIButton) {
         delegate!.didTapRecoverNote(with: self.noteId)

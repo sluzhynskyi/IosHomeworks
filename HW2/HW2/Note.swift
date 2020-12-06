@@ -1,6 +1,5 @@
 import Foundation
 
-
 struct Note {
     let noteId: Int
     var name, text: String
@@ -34,8 +33,6 @@ class NoteDataManager {
     func getNote(id noteId: Int) -> Note? {
         dataSource.first(where: { $0.noteId == noteId })
     }
-
-
 
     func setNote(id noteId: Int, note: Note) -> Bool {
         for (index, element) in self.dataSource.enumerated() {
@@ -82,20 +79,18 @@ class NoteDataManager {
         return nil
     }
 
-    func searchBy(name noteName: String) ->Void{
+    func searchBy(name noteName: String) {
         let filtered = self.dataSource.filter {
             $0.name.lowercased().contains(noteName.lowercased())
         }
         self.filteredNotes = filtered
     }
 
-
-
     func alreadyPresented(note: Note) -> Bool {
         dataSource.contains(note)
     }
 
-    func filterBy(tags: Set <String>) -> Void {
+    func filterBy(tags: Set <String>) {
         let filtered = dataSource.filter {
             $0.tags.intersection(tags).count == tags.count
         }
