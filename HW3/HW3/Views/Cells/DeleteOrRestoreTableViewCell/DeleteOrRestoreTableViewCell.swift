@@ -28,9 +28,9 @@ class DeleteOrRestoreTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    public func configure(with title: String, id nodeId: Int) {
+    public func configure(with title: String, id: Int) {
         nameLable.text = title
-        self.noteId = nodeId
+        self.noteId = id
     }
     @IBAction func recoverNote(_ sender: UIButton) {
         delegate!.didTapRecoverNote(with: self.noteId)

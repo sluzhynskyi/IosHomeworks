@@ -32,8 +32,7 @@ class EntryViewController: UIViewController, UITextViewDelegate {
         if self.note != nil {
             name.text = self.note!.name
             text.text = self.note!.text
-            print(self.note!.tags)
-            tags.text = "#" + [String](self.note!.tags).joined(separator: " #")
+            tags.text = "#" + [String](self.note!.tags!).joined(separator: " #")
             print("not nill")
         } else {
             self.note = ndm1.createNote(name: "", text: "")
@@ -63,12 +62,16 @@ class EntryViewController: UIViewController, UITextViewDelegate {
                 note!.tags = Set(tagsArray)
             }
         }
-        ndm1.setNote(id: self.note!.noteId, note: self.note!)
+        let oldNote = ndm1.getNote(id: Int(self.note!.noteId))
+        oldNote?.name = note?.name
+        oldNote?.text = note?.text
+        oldNote?.tags = note?.tags
+        ndm1.refresh()
         complitionHandler?()
     }
     @objc private func didTapDelete() {
         guard let item = note else { return }
-        ndm1.popNote(id: item.noteId)
+        ndm1.popNote(id: Int(item.noteId))
         deletionHandler?()
         navigationController?.popToRootViewController(animated: true)
 

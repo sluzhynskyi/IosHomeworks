@@ -38,7 +38,7 @@ class RecentlyDeletedViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DeleteOrRestoreTableViewCell.identifier, for: indexPath) as! DeleteOrRestoreTableViewCell
         let note = ndm1.removedSource[indexPath.row]
-        cell.configure(with: note.name, id: note.noteId)
+        cell.configure(with: note.name!, id: Int(note.noteId))
         cell.delegate = self
         return cell
     }
