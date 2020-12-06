@@ -16,7 +16,7 @@ class RecentlyDeletedViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     func didTapDeleteNote(with noteId: Int) {
-        if let index = ndm1.removedSource.firstIndex(where: {$0.noteId == noteId}) {
+        if let index = ndm1.removedSource.firstIndex(where: { $0.noteId == noteId }) {
             ndm1.removedSource.remove(at: index)
         }
         recentlyDeletedTable.reloadData()
