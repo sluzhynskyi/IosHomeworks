@@ -1,6 +1,6 @@
 //
 //  EntryViewController.swift
-//  HW2
+//  HW3
 //
 //  Created by Danylo Sluzhynskyi on 11.11.2020.
 //
