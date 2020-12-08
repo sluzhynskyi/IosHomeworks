@@ -86,9 +86,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return indexPath.row != 0
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete){
-            ndm1.popNote(id: Int(ndm1.dataSource[indexPath.row - 1].noteId))
-            refresh() // new 
+        if (editingStyle == .delete) {
+            ndm1.popNote(id: Int(ndm1.filteredNotes[indexPath.row - 1].noteId))
+            refresh() // new
         }
     }
 
