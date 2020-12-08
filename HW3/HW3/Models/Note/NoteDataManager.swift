@@ -109,12 +109,14 @@ class NoteDataManager {
         return false
     }
 
-    func popNote(id noteId: Int) {
+
+    func popNote(id: Int) {
         for (index, note) in self.dataSource.enumerated() {
-            if note.noteId == noteId {
+            if note.noteId == id {
                 note.deletionDate = Date()
                 self.removedSource.append(note)
                 self.dataSource.remove(at: index)
+                self.filteredNotes.removeAll(where: { $0.noteId == id })
                 self.refresh()
             }
         }

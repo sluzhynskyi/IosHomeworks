@@ -10,16 +10,33 @@ import UIKit
 class RecentlyDeletedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DeleteOrRestoreTableViewCellDelegate {
     public var deletionHandler: (() -> Void)?
     func didTapRecoverNote(with noteId: Int) {
-        ndm1.restoreNote(id: noteId)
-        deletionHandler?()
-        recentlyDeletedTable.reloadData()
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let recoverNote = UIAlertAction(title: "Recover Note", style: .default, handler: { (action) in
+            ndm1.restoreNote(id: noteId)
+            self.deletionHandler?()
+            self.recentlyDeletedTable.reloadData()
+        })
+        alert.addAction(recoverNote)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+        
     }
 
     func didTapDeleteNote(with noteId: Int) {
-        if let index = ndm1.removedSource.firstIndex(where: { $0.noteId == noteId }) {
-            ndm1.removedSource.remove(at: index)
-        }
-        recentlyDeletedTable.reloadData()
+        let alert = UIAlertController(title: nil, message: "This note will be deleted. This action cannot be undone.", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteNote = UIAlertAction(title: "Delete Note", style: .destructive, handler: { (action) in
+            if let index = ndm1.removedSource.firstIndex(where: { $0.noteId == noteId }) {
+                ndm1.removedSource.remove(at: index)
+            }
+            self.recentlyDeletedTable.reloadData()
+        })
+        alert.addAction(cancel)
+        alert.addAction(deleteNote)
+        present(alert, animated: true, completion: nil)
+
     }
 
     @IBOutlet weak var recentlyDeletedTable: UITableView!
