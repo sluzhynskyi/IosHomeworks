@@ -13,13 +13,14 @@ class NoteTableViewCell: UITableViewCell {
         return UINib(nibName: "NoteTableViewCell", bundle: nil)
     }
     var noteId: Int = 0
-    public func configure(with title: String, date: Date, text: String, id noteId: Int) {
-        self.noteId = noteId
+    public func configure(with title: String, date: Date, text: String, id : Int) {
+        self.noteId = id
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         nameLable.text = title
         dateLable.text = formatter.string(from: date)
         textLable.text = text
+        
     }
 
     @IBOutlet var nameLable: UILabel!
