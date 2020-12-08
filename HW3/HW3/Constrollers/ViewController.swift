@@ -82,6 +82,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
     }
+    // MARK: Deletion on swipe
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row != 0
     }
@@ -91,7 +92,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             refresh() // new
         }
     }
-
+    // MARK: Move cells
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        ndm1.filteredNotes.swapAt(sourceIndexPath.row - 1, destinationIndexPath.row - 1)
+    }
     // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty { ndm1.filteredNotes = ndm1.dataSource } else {
@@ -117,6 +124,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.deletionHandler = { [weak self] in
             self?.refresh()
         }
+    }
+    @IBAction func didTapReorderButton(){
+        noteTable.isEditing = !noteTable.isEditing
     }
     func refresh() {
         print("refresh")
